@@ -1,0 +1,13 @@
+Options +FollowSymlinks
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule .* - [QSA,L]
+
+#RewriteRule * /index.php [QSA,L]
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+#AddDefaultCharset utf-8
+
