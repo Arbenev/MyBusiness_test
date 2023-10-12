@@ -15,12 +15,14 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\Fruit\Apple;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -28,8 +30,8 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::class,
-                'only' => ['logout', 'signup'],
+                'class' => AccessControl::className(),
+                'only' => ['logout', 'signup', 'apple'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -37,7 +39,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['apple', 'logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -97,7 +99,7 @@ class SiteController extends Controller
         $model->password = '';
 
         return $this->render('login', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -132,7 +134,7 @@ class SiteController extends Controller
         }
 
         return $this->render('contact', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -160,7 +162,7 @@ class SiteController extends Controller
         }
 
         return $this->render('signup', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -183,7 +185,7 @@ class SiteController extends Controller
         }
 
         return $this->render('requestPasswordResetToken', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -209,7 +211,7 @@ class SiteController extends Controller
         }
 
         return $this->render('resetPassword', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -253,7 +255,25 @@ class SiteController extends Controller
         }
 
         return $this->render('resendVerificationEmail', [
-            'model' => $model
+                    'model' => $model
+        ]);
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function actionApple()
+    {
+        $apples = Apple::findAllExist();
+        /* @var $apple Apple */
+        foreach ($apples as &$apple) {
+            if ($apple->checkTimeToGoBad()) {
+                $apple->save();
+            }
+        }
+        return $this->render('apple', [
+                    'apples' => $apples,
         ]);
     }
 }

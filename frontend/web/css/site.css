@@ -101,3 +101,53 @@ a.desc:after {
 {
     text-decoration: none;
 }
+table {
+    margin: 2em auto;
+    border: #212529 solid 2px !important;
+    font-size: 80%;
+}
+#main thead th{
+    text-align: center;
+    padding: 1em;
+    border: #212529 solid 1px !important;
+}
+#main tbody td{
+    padding: 0.3em 1em;
+    border: #212529 solid 1px !important;
+    /*font-size: 60%;*/
+}
+.btn {
+    margin: 2px;
+}
+.hidden {
+    display: none;
+}
+.error{
+    border: red solid 3px !important;
+}
+input.eat{
+    width:3em;
+    box-shadow: #999 3px 3px 3px;
+    margin: 0 5px;
+}
+#main td {
+    background-color: #f3f3f3;
+}
+#main td.red {
+    background-color:#f4cccc;
+}
+#main td.green{
+    background-color:#d9ead3;
+}
+#main td.yellow{
+    background-color:#fff2cc;
+}
+#main td.white{
+    background-color:white;
+}
+.btn-primary {
+    background-color: #4a86e8;
+}
+.btn-info {
+    background-color: #a4c2f4;
+}
